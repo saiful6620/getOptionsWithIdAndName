@@ -4,16 +4,15 @@ export const getOptionsWithIdAndName = <T extends Record<string, unknown>>(
   nameKey: string,
 ): (T & {id: string | number; name: string})[] => {
   const options: (T & {id: string | number; name: string})[] = []
-  if (data) {
-    data.forEach(item => {
-      const id = item[idKey as keyof T] as string | number
-      const name = item[nameKey as keyof T] as string
-      options.push({
-        ...item,
-        id,
-        name,
-      })
+  if (!data) return options;
+  data.forEach(item => {
+    const id = item[idKey as keyof T] as string | number
+    const name = item[nameKey as keyof T] as string
+    options.push({
+      ...item,
+      id,
+      name,
     })
-  }
+  })
   return options
 }
